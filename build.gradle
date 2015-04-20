@@ -1,4 +1,5 @@
 apply plugin: "java"
+apply plugin: "idea"
 
 group = "io.reactivex"
 version = "1.0-SNAPSHOT"
@@ -7,10 +8,19 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
-    jcenter()
+    maven {
+        url "http://artifactory.kroger.com/artifactory/repo1"
+    }
 }
 
 dependencies {
     compile "io.reactivex:rxjava:1.0.0-rc.10"
     testCompile "junit:junit:4.11"
 }
+
+task wrapper(type: Wrapper, description: 'Generate gradlew.') {
+    gradleVersion = '2.2'
+    distributionUrl = "http://artifactory.kroger.com/artifactory/gradle-distributions/gradle-${gradleVersion}-bin.zip"
+}
+
+
